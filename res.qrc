@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>styleButton.css</file>
+        <file>plane.jpg</file>
+    </qresource>
+</RCC>
