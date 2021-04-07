@@ -25,13 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainmenu.cpp
+        mainmenu.cpp \
+    playingfield.cpp
 
 HEADERS += \
-        mainmenu.h
+        mainmenu.h \
+    playingfield.h
 
 FORMS += \
-        mainmenu.ui
+        mainmenu.ui \
+    playingfield.ui
 
 RESOURCES += \
     res.qrc

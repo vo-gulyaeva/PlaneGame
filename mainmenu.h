@@ -2,6 +2,7 @@
 #define MAINMENU_H
 
 #include <QMainWindow>
+#include "playingfield.h"
 
 namespace Ui {
 class MainMenu;
@@ -10,13 +11,15 @@ class MainMenu;
 class MainMenu : public QMainWindow
 {
     Q_OBJECT
-
+private slots:
+    void slotsShowField();
 public:
     explicit MainMenu(QWidget *parent = 0);
     ~MainMenu();
 
 private:
     Ui::MainMenu *ui;
+    PlayingField *playing_field;
 };
 
 #endif // MAINMENU_H

@@ -25,9 +25,19 @@ MainMenu::MainMenu(QWidget *parent) :
         ui->phbExit->setStyleSheet(settings);
     }
     file.exists();
+
+    playing_field = new PlayingField();
+    connect(ui->phbPlay,SIGNAL(clicked()),this,SLOT(slotsShowField()));
+    connect(playing_field,&PlayingField::goToMenu,this,&MainMenu::show);
 }
 
 MainMenu::~MainMenu()
 {
     delete ui;
+}
+
+void MainMenu::slotsShowField()
+{
+    playing_field->show();
+    this->close();
 }

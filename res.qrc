@@ -2,5 +2,6 @@
     <qresource prefix="/res">
         <file>styleButton.css</file>
         <file>plane.jpg</file>
+        <file>sky.png</file>
     </qresource>
 </RCC>

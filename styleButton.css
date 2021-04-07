@@ -3,7 +3,6 @@ QPushButton {
      border-radius: 6px;
      background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                        stop: 0 rgb(246,247,250,125), stop: 1 rgb(218,219,222,125));
-     min-width: 80px;
  }
 QPushButton:hover {
      background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
