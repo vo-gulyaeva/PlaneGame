@@ -29,6 +29,7 @@ MainMenu::MainMenu(QWidget *parent) :
     playing_field = new PlayingField();
     connect(ui->phbPlay,SIGNAL(clicked()),this,SLOT(slotsShowField()));
     connect(playing_field,&PlayingField::goToMenu,this,&MainMenu::show);
+    connect(ui->phbExit, &QPushButton::clicked,this, &MainMenu::close);
 }
 
 MainMenu::~MainMenu()

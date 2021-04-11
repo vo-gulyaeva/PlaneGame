@@ -2,6 +2,7 @@
 #define PLAYINGFIELD_H
 
 #include <QWidget>
+#include "gamescene.h"
 
 namespace Ui {
 class PlayingField;
@@ -20,6 +21,7 @@ public:
 
 private:
     Ui::PlayingField *ui;
+    GameScene *gameScene;
 };
 
 #endif // PLAYINGFIELD_H

@@ -1,6 +1,7 @@
 #include "playingfield.h"
 #include "ui_playingfield.h"
 #include <QFile>
+#include "gamescene.h"
 
 PlayingField::PlayingField(QWidget *parent) :
     QWidget(parent),
@@ -14,6 +15,7 @@ PlayingField::PlayingField(QWidget *parent) :
     QPalette palette;
     palette.setBrush(QPalette::Window, brush);
     this->setPalette(palette);
+    ui->graphicsView->setPalette(palette);
     //установка стилей кнопок
     QFile btnSetting(":/res/styleButton.css");
     if(btnSetting.open(QFile::ReadOnly))
@@ -21,6 +23,15 @@ PlayingField::PlayingField(QWidget *parent) :
     btnSetting.exists();
 
     connect(ui->phbToMenu,SIGNAL(clicked()),this,SLOT(slotToMenu()));
+
+    gameScene = new GameScene();
+    gameScene->setSceneRect(0,0,868,701);
+
+    ui->graphicsView->setScene(gameScene);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView->setMouseTracking(true);
 }
 
 PlayingField::~PlayingField()

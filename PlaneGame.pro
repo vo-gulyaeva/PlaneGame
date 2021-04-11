@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainmenu.cpp \
-    playingfield.cpp
+    playingfield.cpp \
+    gamescene.cpp
 
 HEADERS += \
         mainmenu.h \
-    playingfield.h
+    playingfield.h \
+    gamescene.h
 
 FORMS += \
         mainmenu.ui \
