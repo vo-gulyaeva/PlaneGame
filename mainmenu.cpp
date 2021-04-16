@@ -10,7 +10,7 @@ MainMenu::MainMenu(QWidget *parent) :
     setFixedHeight(800);
     setFixedWidth(800);
     //фоновое изображение
-    QBrush brush(QPixmap(":/res/plane.jpg"));
+    QBrush brush(QPixmap(":/res/mainmenu.jpg"));
     QPalette palette;
     palette.setBrush(QPalette::Window, brush);
     this->setPalette(palette);

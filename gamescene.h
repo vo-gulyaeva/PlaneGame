@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QObject>
 #include <QGraphicsSceneMouseEvent>
+#include <QPointF>
 
 class GameScene : public QGraphicsScene
 {

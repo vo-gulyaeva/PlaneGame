@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainmenu.cpp \
     playingfield.cpp \
-    gamescene.cpp
+    gamescene.cpp \
+    mainplane.cpp
 
 HEADERS += \
         mainmenu.h \
     playingfield.h \
-    gamescene.h
+    gamescene.h \
+    mainplane.h
 
 FORMS += \
         mainmenu.ui \
