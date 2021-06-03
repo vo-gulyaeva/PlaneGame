@@ -1,3 +1,4 @@
+// 2021 год, игра - самолет
 #include "gamescene.h"
 #include <QPalette>
 
@@ -18,3 +19,8 @@ void GameScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     emit signalCursorCoordinate(event->scenePos());
 }
+
+ void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
+ {
+     emit signalClick(mouseEvent->scenePos());
+ }

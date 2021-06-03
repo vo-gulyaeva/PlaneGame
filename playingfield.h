@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////
+//
+//! \file playfield.h
+//! \brief Игровое поле, унаследовано от QWidget
+//
+//  Gulyaeva V.
+//
+//////////////////////////////////////////////////////////////////////////
+
 #ifndef PLAYINGFIELD_H
 #define PLAYINGFIELD_H
 
@@ -5,6 +14,8 @@
 #include <QPointF>
 #include "gamescene.h"
 #include "mainplane.h"
+#include <QVector>
+#include "bullet.h"
 
 namespace Ui {
 class PlayingField;
@@ -18,9 +29,11 @@ signals:
 private slots:
     void slotToMenu();
     void slotMovePlane(QPointF);
+    void slotStartBullet(QPointF);
 public:
     explicit PlayingField(QWidget *parent = 0);
     ~PlayingField();
+    void updatePosPlane();
 
 private:
     Ui::PlayingField *ui;

@@ -1,14 +1,14 @@
 //////////////////////////////////////////////////////////////////////////
 //
-//! \file mainplane.h
-//! \brief Игровой самолет, унаследован от QGraphicsItem
+//! \file bullet.h
+//! \brief Снаряд игрового самолета
 //
 //  Gulyaeva V.
 //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef MAINPLANE_H
-#define MAINPLANE_H
+#ifndef BULLET_H
+#define BULLET_H
 
 #include <QObject>
 #include <QGraphicsItem>
@@ -16,21 +16,19 @@
 #include <QPainter>
 #include <QTimer>
 
-class MainPlane : public QObject, public QGraphicsItem
+class Bullet : public QObject, public QGraphicsItem
 {
     Q_OBJECT
-    Q_INTERFACES(QGraphicsItem)
 public:
-    explicit MainPlane(QObject *parent = 0);
-    ~MainPlane();
+    explicit Bullet(QObject *parent = 0);
+    ~Bullet();
 private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 private slots:
-    void slotTimerScrew();
+    void slotTimerMove();
 private:
-    QTimer *timer_screw;
-    bool screw;
+    QTimer *timer_move;
 };
 
-#endif // MAINPLANE_H
+#endif // BULLET_H

@@ -28,13 +28,15 @@ SOURCES += \
         mainmenu.cpp \
     playingfield.cpp \
     gamescene.cpp \
-    mainplane.cpp
+    mainplane.cpp \
+    bullet.cpp
 
 HEADERS += \
         mainmenu.h \
     playingfield.h \
     gamescene.h \
-    mainplane.h
+    mainplane.h \
+    bullet.h
 
 FORMS += \
         mainmenu.ui \

@@ -1,3 +1,4 @@
+// 2021 год, игра - самолет
 #include "mainplane.h"
 
 MainPlane::MainPlane(QObject *parent) : QObject(parent), QGraphicsItem(),

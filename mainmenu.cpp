@@ -1,3 +1,4 @@
+// 2021 год, игра - самолет
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
 #include <QFile>
@@ -40,5 +41,6 @@ MainMenu::~MainMenu()
 void MainMenu::slotsShowField()
 {
     playing_field->show();
+    playing_field->updatePosPlane();
     this->close();
 }

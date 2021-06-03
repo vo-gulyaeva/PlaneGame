@@ -1,3 +1,4 @@
+// 2021 год, игра - самолет
 #include "mainmenu.h"
 #include <QApplication>
 

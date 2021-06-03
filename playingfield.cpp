@@ -1,7 +1,9 @@
+// 2021 год, игра - самолет
 #include "playingfield.h"
 #include "ui_playingfield.h"
 #include <QFile>
 #include "gamescene.h"
+#include "bullet.h"
 
 PlayingField::PlayingField(QWidget *parent) :
     QWidget(parent),
@@ -35,8 +37,8 @@ PlayingField::PlayingField(QWidget *parent) :
 
     plane = new MainPlane();
     gameScene->addItem(plane);
-    plane->setPos(484.,735.);
     connect(gameScene, &GameScene::signalCursorCoordinate, this, &PlayingField::slotMovePlane);
+    connect(gameScene, &GameScene::signalClick, this, &PlayingField::slotStartBullet);
 }
 
 PlayingField::~PlayingField()
@@ -53,4 +55,19 @@ void PlayingField::slotToMenu()
 void PlayingField::slotMovePlane(QPointF pos)
 {
     plane->setPos(pos.x(),735.);
+}
+
+void PlayingField::slotStartBullet(QPointF pos)
+{
+    Bullet *bullet = new Bullet();
+    bullet->setPos(pos.x(), 670.);
+    gameScene->addItem(bullet);
+}
+
+void PlayingField::updatePosPlane()
+{
+    QPoint pos = this->mapFromGlobal(QCursor::pos());
+    pos = ui->graphicsView->mapFromParent(pos);
+    QPointF posScene = ui->graphicsView->mapToScene(pos);
+    plane->setPos(posScene.x(), 735.);
 }
