@@ -29,8 +29,8 @@ private:
 private slots:
     void slotTimerScrew();
 private:
-    QTimer *timer_screw;
-    bool screw;
+    QTimer *timerScrew_;
+    bool screw_;
 };
 
 #endif // MAINPLANE_H

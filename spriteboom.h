@@ -1,38 +1,39 @@
 //////////////////////////////////////////////////////////////////////////
 //
-//! \file bullet.h
-//! \brief Снаряд игрового самолета
+//! \file spriteboom.h
+//! \brief Взрыв
 //
 //  Gulyaeva V.
 //
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef BULLET_H
-#define BULLET_H
+#ifndef SPRITEBOOM_H
+#define SPRITEBOOM_H
 
 #include <QObject>
 #include <QGraphicsItem>
-#include <QRectF>
 #include <QPainter>
 #include <QTimer>
+#include <QPixmap>
+#include <QRectF>
 
-class Bullet : public QObject, public QGraphicsItem
+class SpriteBoom : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 public:
-    Bullet(QGraphicsItem*,QObject *parent = 0);
-    ~Bullet();
-signals:
-    void signalFoundEnemy(QGraphicsItem*);
+    explicit SpriteBoom(QObject *parent = 0);
+    ~SpriteBoom();
 private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 private slots:
-    void slotTimerMove();
+    void slotTimer();
 private:
-    QTimer *timerMove_;
-    QGraphicsItem *mainPlane_;
+    QTimer *timer_;
+    QPixmap *spriteImage_;
+    int xPix_, yPix_;
+    int frame_;
 };
 
-#endif // BULLET_H
+#endif // SPRITEBOOM_H

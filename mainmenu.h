@@ -28,7 +28,7 @@ public:
 
 private:
     Ui::MainMenu *ui;
-    PlayingField *playing_field;
+    PlayingField *playingField_;
 };
 
 #endif // MAINMENU_H

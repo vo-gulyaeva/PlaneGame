@@ -27,9 +27,9 @@ MainMenu::MainMenu(QWidget *parent) :
     }
     file.exists();
 
-    playing_field = new PlayingField();
+    playingField_ = new PlayingField();
     connect(ui->phbPlay,SIGNAL(clicked()),this,SLOT(slotsShowField()));
-    connect(playing_field,&PlayingField::goToMenu,this,&MainMenu::show);
+    connect(playingField_,&PlayingField::goToMenu,this,&MainMenu::show);
     connect(ui->phbExit, &QPushButton::clicked,this, &MainMenu::close);
 }
 
@@ -40,7 +40,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::slotsShowField()
 {
-    playing_field->show();
-    playing_field->updatePosPlane();
+    playingField_->show();
+    playingField_->updatePosPlane();
     this->close();
 }

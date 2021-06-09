@@ -16,6 +16,7 @@
 #include "mainplane.h"
 #include <QVector>
 #include "bullet.h"
+#include <QTimer>
 
 namespace Ui {
 class PlayingField;
@@ -30,6 +31,9 @@ private slots:
     void slotToMenu();
     void slotMovePlane(QPointF);
     void slotStartBullet(QPointF);
+    void slotCreateEnemy();
+    void slotDeleteEnemy(QGraphicsItem*);
+    void slotMeetEnemy();
 public:
     explicit PlayingField(QWidget *parent = 0);
     ~PlayingField();
@@ -37,8 +41,11 @@ public:
 
 private:
     Ui::PlayingField *ui;
-    GameScene *gameScene;
-    MainPlane *plane;
+    GameScene *gameScene_;
+    MainPlane *plane_;
+    QTimer *timerEnemy_;
+    int score_;
+    int life_;
 };
 
 #endif // PLAYINGFIELD_H

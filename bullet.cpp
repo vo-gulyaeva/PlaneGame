@@ -1,16 +1,19 @@
 // 2021 год, игра - самолет
 #include "bullet.h"
+#include <QList>
+#include <QPolygonF>
+#include <QGraphicsScene>
 
-Bullet::Bullet(QObject *parent) : QObject(parent), QGraphicsItem()
+Bullet::Bullet(QGraphicsItem *mainPlane, QObject *parent) :
+    QObject(parent), QGraphicsItem(), mainPlane_(mainPlane)
 {
-    timer_move = new QTimer(this);
-    connect(timer_move, &QTimer::timeout, this, &Bullet::slotTimerMove);
-    timer_move->start(100);
+    timerMove_ = new QTimer(this);
+    connect(timerMove_, &QTimer::timeout, this, &Bullet::slotTimerMove);
+    timerMove_->start(100);
 }
 
 Bullet::~Bullet()
 {
-
 }
 
 QRectF Bullet::boundingRect() const
@@ -34,6 +37,16 @@ void Bullet::slotTimerMove()
     QPointF pos = this->pos();
     if(pos.y() - 20. <= 0)
         this->deleteLater();
-
     this->setPos(pos.x(), pos.y() - 20.);
+
+    QList<QGraphicsItem*> foundItems = scene()->items(QPolygonF()<<mapToScene(0,0)
+                                                     <<mapToScene(0,-1));
+    for(auto item : foundItems)
+    {
+        if(item == this || item == mainPlane_)
+            continue;
+
+        emit signalFoundEnemy(item);
+        this->deleteLater();
+    }
 }

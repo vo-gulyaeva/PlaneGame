@@ -2,17 +2,16 @@
 #include "mainplane.h"
 
 MainPlane::MainPlane(QObject *parent) : QObject(parent), QGraphicsItem(),
-    screw(true)
+    screw_(true)
 {
-    timer_screw = new QTimer(this);
+    timerScrew_ = new QTimer(this);
 
-    connect(timer_screw,&QTimer::timeout,this,&MainPlane::slotTimerScrew);
-    timer_screw->start(100);
+    connect(timerScrew_,&QTimer::timeout,this,&MainPlane::slotTimerScrew);
+    timerScrew_->start(100);
 }
 
 MainPlane::~MainPlane()
 {
-
 }
 
 QRectF MainPlane::boundingRect() const
@@ -27,13 +26,13 @@ void MainPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     QRectF target(-60.,-60.,120.,120.);
     QRectF source(0.0, 0.0, 120.0, 120.0);
-    QString nameFile = screw ? ":/res/plane1.png" : ":/res/plane2.png";
+    QString nameFile = screw_ ? ":/res/plane1.png" : ":/res/plane2.png";
     QPixmap pixmap(nameFile);
     painter->drawPixmap(target, pixmap, source);
 }
 
 void MainPlane::slotTimerScrew()
 {
-    screw = !screw;
+    screw_ = !screw_;
     this->update(QRectF(-60.,-60.,120.,120.));
 }

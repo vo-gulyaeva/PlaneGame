@@ -5,5 +5,10 @@
         <file>mainmenu.jpg</file>
         <file>plane1.png</file>
         <file>plane2.png</file>
+        <file>enemy1_1.png</file>
+        <file>enemy1_2.png</file>
+        <file>enemy2_1.png</file>
+        <file>enemy2_2.png</file>
+        <file>boom.png</file>
     </qresource>
 </RCC>
