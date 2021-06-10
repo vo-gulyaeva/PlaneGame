@@ -11,7 +11,7 @@
 #define MAINMENU_H
 
 #include <QMainWindow>
-#include "playingfield.h"
+#include "PlayingField/playingfield.h"
 
 namespace Ui {
 class MainMenu;

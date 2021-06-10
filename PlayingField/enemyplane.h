@@ -10,13 +10,7 @@
 #ifndef ENEMYPLANE_H
 #define ENEMYPLANE_H
 
-#include <QObject>
-#include <QGraphicsItem>
-#include <QRectF>
-#include <QPointF>
-#include <QString>
-#include <QPainter>
-#include <QTimer>
+#include "precompiled.h"
 
 class EnemyPlane : public QObject, public QGraphicsItem
 {

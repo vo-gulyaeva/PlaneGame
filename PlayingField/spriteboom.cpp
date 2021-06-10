@@ -1,10 +1,10 @@
 // 2021 год, игра - самолет
-#include "spriteboom.h"
+#include "PlayingField/spriteboom.h"
 
 SpriteBoom::SpriteBoom(QObject *parent) :
     QObject(parent), QGraphicsItem()
 {
-    spriteImage_ = new QPixmap(":/res/boom.png");
+    spriteImage_ = new QPixmap(":/res/PlayingField/boom.png");
     xPix_ = 0, yPix_ = 0;
     frame_ = 1;
 

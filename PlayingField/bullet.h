@@ -10,11 +10,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <QObject>
-#include <QGraphicsItem>
-#include <QRectF>
-#include <QPainter>
-#include <QTimer>
+#include "precompiled.h"
 
 class Bullet : public QObject, public QGraphicsItem
 {

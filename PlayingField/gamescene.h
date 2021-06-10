@@ -10,10 +10,7 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include <QGraphicsScene>
-#include <QObject>
-#include <QGraphicsSceneMouseEvent>
-#include <QPointF>
+#include "precompiled.h"
 
 class GameScene : public QGraphicsScene
 {

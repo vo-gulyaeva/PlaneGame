@@ -1,12 +1,12 @@
 // 2021 год, игра - самолет
-#include "gamescene.h"
+#include "PlayingField/gamescene.h"
 #include <QPalette>
 
 GameScene::GameScene(QObject *parent)
     : QGraphicsScene()
 {
     Q_UNUSED(parent);
-    QBrush brush(QPixmap(":/res/sky.png"));
+    QBrush brush(QPixmap(":/res/PlayingField/sky.png"));
     this->setBackgroundBrush(brush);
 }
 

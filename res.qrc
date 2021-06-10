@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/res">
         <file>styleButton.css</file>
-        <file>sky.png</file>
         <file>mainmenu.jpg</file>
-        <file>plane1.png</file>
-        <file>plane2.png</file>
-        <file>enemy1_1.png</file>
-        <file>enemy1_2.png</file>
-        <file>enemy2_1.png</file>
-        <file>enemy2_2.png</file>
-        <file>boom.png</file>
+        <file>PlayingField/boom.png</file>
+        <file>PlayingField/enemy1_1.png</file>
+        <file>PlayingField/enemy1_2.png</file>
+        <file>PlayingField/enemy2_1.png</file>
+        <file>PlayingField/enemy2_2.png</file>
+        <file>PlayingField/plane1.png</file>
+        <file>PlayingField/plane2.png</file>
+        <file>PlayingField/sky.png</file>
     </qresource>
 </RCC>

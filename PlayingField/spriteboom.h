@@ -10,12 +10,7 @@
 #ifndef SPRITEBOOM_H
 #define SPRITEBOOM_H
 
-#include <QObject>
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QTimer>
-#include <QPixmap>
-#include <QRectF>
+#include "precompiled.h"
 
 class SpriteBoom : public QObject, public QGraphicsItem
 {

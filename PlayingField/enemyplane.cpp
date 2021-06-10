@@ -1,5 +1,5 @@
 // 2021 год, игра - самолет
-#include "enemyplane.h"
+#include "PlayingField/enemyplane.h"
 #include <QList>
 #include <QPolygonF>
 #include <QGraphicsScene>
@@ -10,7 +10,7 @@ EnemyPlane::EnemyPlane(QPointF pos, EnemyPlane::TypePlane typePlane,
     screw_(true), mainPlane_(mainPlane)
 {
     this->setPos(pos);
-    namePix_ = typePlane_==TypePlane::typeSimple ? ":/res/enemy1_" : ":/res/enemy2_";
+    namePix_ = typePlane_==TypePlane::typeSimple ? ":/res/PlayingField/enemy1_" : ":/res/PlayingField/enemy2_";
 
     timerScrew_ = new QTimer(this);
     connect(timerScrew_, &QTimer::timeout, this, &EnemyPlane::slotTimerScrew);

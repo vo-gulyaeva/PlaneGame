@@ -26,25 +26,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainmenu.cpp \
-        playingfield.cpp \
-        gamescene.cpp \
-        mainplane.cpp \
-        bullet.cpp \
-        enemyplane.cpp \
-    spriteboom.cpp
+        PlayingField/playingfield.cpp \
+        PlayingField/gamescene.cpp \
+        PlayingField/mainplane.cpp \
+        PlayingField/bullet.cpp \
+        PlayingField/enemyplane.cpp \
+        PlayingField/spriteboom.cpp
 
 HEADERS += \
         mainmenu.h \
-        playingfield.h \
-        gamescene.h \
-        mainplane.h \
-        bullet.h \
-        enemyplane.h \
-    spriteboom.h
+        PlayingField/playingfield.h \
+        PlayingField/gamescene.h \
+        PlayingField/mainplane.h \
+        PlayingField/bullet.h \
+        PlayingField/enemyplane.h \
+        PlayingField/spriteboom.h \
+        precompiled.h
 
 FORMS += \
         mainmenu.ui \
-        playingfield.ui
+        PlayingField/playingfield.ui
 
 RESOURCES += \
     res.qrc

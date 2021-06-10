@@ -1,5 +1,5 @@
 // 2021 год, игра - самолет
-#include "bullet.h"
+#include "PlayingField/bullet.h"
 #include <QList>
 #include <QPolygonF>
 #include <QGraphicsScene>

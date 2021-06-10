@@ -11,12 +11,9 @@
 #define PLAYINGFIELD_H
 
 #include <QWidget>
-#include <QPointF>
-#include "gamescene.h"
-#include "mainplane.h"
-#include <QVector>
-#include "bullet.h"
-#include <QTimer>
+#include "precompiled.h"
+#include "PlayingField/gamescene.h"
+#include "PlayingField/mainplane.h"
 
 namespace Ui {
 class PlayingField;

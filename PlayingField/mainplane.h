@@ -10,11 +10,7 @@
 #ifndef MAINPLANE_H
 #define MAINPLANE_H
 
-#include <QObject>
-#include <QGraphicsItem>
-#include <QRectF>
-#include <QPainter>
-#include <QTimer>
+#include "precompiled.h"
 
 class MainPlane : public QObject, public QGraphicsItem
 {

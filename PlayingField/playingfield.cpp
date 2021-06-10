@@ -1,12 +1,12 @@
 // 2021 год, игра - самолет
-#include "playingfield.h"
+#include "PlayingField/playingfield.h"
 #include "ui_playingfield.h"
 #include <QFile>
-#include "gamescene.h"
 #include "bullet.h"
-#include "enemyplane.h"
+#include "PlayingField/enemyplane.h"
 #include <QRandomGenerator>
-#include "spriteboom.h"
+#include "PlayingField/spriteboom.h"
+#include "PlayingField/bullet.h"
 
 PlayingField::PlayingField(QWidget *parent) :
     QWidget(parent),
@@ -18,7 +18,7 @@ PlayingField::PlayingField(QWidget *parent) :
     life_ = 3;
     score_ = 0;
     //фоновое изображение
-    QBrush brush(QPixmap(":/res/sky.png"));
+    QBrush brush(QPixmap(":/res/PlayingField/sky.png"));
     QPalette palette;
     palette.setBrush(QPalette::Window, brush);
     this->setPalette(palette);

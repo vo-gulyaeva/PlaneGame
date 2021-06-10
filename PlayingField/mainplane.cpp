@@ -1,5 +1,5 @@
 // 2021 год, игра - самолет
-#include "mainplane.h"
+#include "PlayingField/mainplane.h"
 
 MainPlane::MainPlane(QObject *parent) : QObject(parent), QGraphicsItem(),
     screw_(true)
@@ -26,7 +26,7 @@ void MainPlane::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     QRectF target(-60.,-60.,120.,120.);
     QRectF source(0.0, 0.0, 120.0, 120.0);
-    QString nameFile = screw_ ? ":/res/plane1.png" : ":/res/plane2.png";
+    QString nameFile = screw_ ? ":/res/PlayingField/plane1.png" : ":/res/PlayingField/plane2.png";
     QPixmap pixmap(nameFile);
     painter->drawPixmap(target, pixmap, source);
 }
