@@ -22,18 +22,24 @@ public:
         typeSimple,
         typeAverage
     };
+    enum class DepartureSide
+    {
+        top,
+        left,
+        right
+    };
 public:
-    EnemyPlane(QPointF, EnemyPlane::TypePlane, QGraphicsItem *, QObject *parent = 0);
+    EnemyPlane(EnemyPlane::TypePlane, QObject *parent = 0);
     ~EnemyPlane();
     void setLife(int);
     bool tookHit();         //Вызывается при попадании снаряда,
                             //Возвращает true - жив, false - убит
     int typePlane();
-signals:
-    void signalMeetMainPlane();
+    void setStartPos();     //ВЫЗОВ ПОСЛЕ ДОБАВЛЕНИЯ НА СЦЕНУ!
 private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    int generateCourse();
 private slots:
     void slotTimerScrew();
     void slotTimerMove();
@@ -43,8 +49,9 @@ private:
     bool screw_;
     QTimer *timerScrew_;
     QTimer *timerMove_;
-    QGraphicsItem *mainPlane_;
     int life_;
+    EnemyPlane::DepartureSide side_;
+    int course_;
 };
 
 #endif // ENEMYPLANE_H

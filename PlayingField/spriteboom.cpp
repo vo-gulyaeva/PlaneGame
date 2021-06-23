@@ -33,7 +33,10 @@ void SpriteBoom::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void SpriteBoom::slotTimer()
 {
     if(frame_ == 17)
+    {
         this->deleteLater();
+        return;
+    }
     xPix_ = ((frame_ - 1)%4)*120;
     yPix_ = (frame_%5)==0? yPix_ + 120 : yPix_;
     frame_++;

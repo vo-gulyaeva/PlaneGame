@@ -41,6 +41,6 @@ MainMenu::~MainMenu()
 void MainMenu::slotsShowField()
 {
     playingField_->show();
-    playingField_->updatePosPlane();
+    playingField_->slotStart();
     this->close();
 }

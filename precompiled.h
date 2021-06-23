@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////
 //
-//! \file precompiled.h
+//! \file precompiled.h++
 //
 //  Gulyaeva V.
 //
@@ -15,6 +15,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSimpleTextItem>
+#include <QLabel>
 
 #include <QRectF>
 #include <QPainter>

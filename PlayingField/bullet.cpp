@@ -36,7 +36,10 @@ void Bullet::slotTimerMove()
 {
     QPointF pos = this->pos();
     if(pos.y() - 20. <= 0)
+    {
         this->deleteLater();
+        return;
+    }
     this->setPos(pos.x(), pos.y() - 20.);
 
     QList<QGraphicsItem*> foundItems = scene()->items(QPolygonF()<<mapToScene(0,0)

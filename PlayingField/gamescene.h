@@ -18,12 +18,17 @@ class GameScene : public QGraphicsScene
 signals:
     void signalCursorCoordinate(QPointF pos);
     void signalClick(QPointF pos);
+    void signalEnemyAbaftField();
 public:
     explicit GameScene(QObject *parent = 0);
     ~GameScene();
 private:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent);
+private slots:
+    void slotClear();
+private:
+    QTimer *timerClear_;
 };
 
 #endif // GAMESCENE_H

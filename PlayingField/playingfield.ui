@@ -20,6 +20,30 @@
    <string>Игровое поле</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="3">
+    <widget class="QPushButton" name="phbToStart">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Играть еще раз</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="1">
     <widget class="QSpinBox" name="spinScore">
      <property name="minimumSize">
@@ -73,7 +97,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -86,25 +110,7 @@
      </property>
     </spacer>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QPushButton" name="phbToMenu">
-     <property name="minimumSize">
-      <size>
-       <width>140</width>
-       <height>40</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>&lt;- Главное меню</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
+   <item row="0" column="4">
     <widget class="QLabel" name="labelLife">
      <property name="font">
       <font>
@@ -116,7 +122,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
+   <item row="0" column="5">
     <widget class="QSpinBox" name="spinLife">
      <property name="minimumSize">
       <size>
@@ -157,7 +163,25 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="5">
+   <item row="3" column="0" colspan="2">
+    <widget class="QPushButton" name="phbToMenu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>&lt;- Главное меню</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="6">
     <widget class="QGraphicsView" name="graphicsView">
      <property name="font">
       <font>
@@ -165,6 +189,22 @@
       </font>
      </property>
     </widget>
+   </item>
+   <item row="3" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Maximum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>250</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

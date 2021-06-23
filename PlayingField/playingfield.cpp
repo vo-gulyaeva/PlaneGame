@@ -15,8 +15,6 @@ PlayingField::PlayingField(QWidget *parent) :
     ui->setupUi(this);
     setFixedHeight(900);
     setFixedWidth(900);
-    life_ = 3;
-    score_ = 0;
     //фоновое изображение
     QBrush brush(QPixmap(":/res/PlayingField/sky.png"));
     QPalette palette;
@@ -26,10 +24,16 @@ PlayingField::PlayingField(QWidget *parent) :
     //установка стилей кнопок
     QFile btnSetting(":/res/styleButton.css");
     if(btnSetting.open(QFile::ReadOnly))
-        ui->phbToMenu->setStyleSheet(btnSetting.readAll());
+    {
+        QString styleButton = btnSetting.readAll();
+        ui->phbToMenu->setStyleSheet(styleButton);
+        ui->phbToStart->setStyleSheet(styleButton);
+    }
     btnSetting.exists();
 
-    connect(ui->phbToMenu,SIGNAL(clicked()),this,SLOT(slotToMenu()));
+    connect(ui->phbToMenu,&QPushButton::clicked,this,&PlayingField::slotStop);
+    connect(ui->phbToMenu,&QPushButton::clicked,this,&PlayingField::slotToMenu);
+    connect(ui->phbToStart, &QPushButton::clicked,this,&PlayingField::slotStart);
 
     gameScene_ = new GameScene();
     gameScene_->setSceneRect(0,0,969,801);
@@ -40,13 +44,19 @@ PlayingField::PlayingField(QWidget *parent) :
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setMouseTracking(true);
 
-    plane_ = new MainPlane();
-    gameScene_->addItem(plane_);
-    connect(gameScene_, &GameScene::signalCursorCoordinate, this, &PlayingField::slotMovePlane);
-    connect(gameScene_, &GameScene::signalClick, this, &PlayingField::slotStartBullet);
-
     timerEnemy_ = new QTimer(this);
     connect(timerEnemy_, &QTimer::timeout, this, &PlayingField::slotCreateEnemy);
+
+    plane_ = new MainPlane();
+    gameScene_->addItem(plane_);
+    connect(plane_, &MainPlane::signalGameOver, this, &PlayingField::slotStop);
+    connect(gameScene_, &GameScene::signalEnemyAbaftField, this, &PlayingField::slotEnemyAbaftField);
+
+    connect(gameScene_, &GameScene::signalCursorCoordinate, this, &PlayingField::slotMovePlane);
+
+    textGameOver = new QGraphicsSimpleTextItem("Конец игры");
+    QFont font("Times", 70, QFont::Cursive);
+    textGameOver->setFont(font);
 }
 
 PlayingField::~PlayingField()
@@ -54,9 +64,44 @@ PlayingField::~PlayingField()
     delete ui;
 }
 
+void PlayingField::slotStart()
+{
+    ui->phbToStart->setEnabled(false);
+    gameScene_->removeItem(textGameOver);
+
+    life_ = 3;
+    score_ = 0;
+    ui->spinLife->setValue(life_);
+    ui->spinScore->setValue(score_);
+
+    connect(gameScene_, &GameScene::signalClick, this, &PlayingField::slotStartBullet);
+
+    timerEnemy_->start(3000);
+    slotCreateEnemy();
+    QPoint pos = this->mapFromGlobal(QCursor::pos());
+    pos = ui->graphicsView->mapFromParent(pos);
+    QPointF posScene = ui->graphicsView->mapToScene(pos);
+    plane_->setPos(posScene.x(), 735.);
+}
+
+void PlayingField::slotStop()
+{
+    life_ = 0;
+    ui->spinLife->setValue(life_);
+    timerEnemy_->stop();
+    disconnect(gameScene_, &GameScene::signalClick, this, &PlayingField::slotStartBullet);
+    ui->phbToStart->setEnabled(true);
+
+    for(auto item : gameScene_->items())
+        if(item!=plane_)
+        {
+            gameScene_->removeItem(item);
+            delete item;
+        }
+}
+
 void PlayingField::slotToMenu()
 {
-    timerEnemy_->stop();
     this->close();
     emit goToMenu();
 }
@@ -74,27 +119,16 @@ void PlayingField::slotStartBullet(QPointF pos)
     connect(bullet, &Bullet::signalFoundEnemy, this, &PlayingField::slotDeleteEnemy);
 }
 
-void PlayingField::updatePosPlane()
-{
-    timerEnemy_->start(3000);
-    slotCreateEnemy();
-    QPoint pos = this->mapFromGlobal(QCursor::pos());
-    pos = ui->graphicsView->mapFromParent(pos);
-    QPointF posScene = ui->graphicsView->mapToScene(pos);
-    plane_->setPos(posScene.x(), 735.);
-}
-
 void PlayingField::slotCreateEnemy()
 {
-    int xPoint = QRandomGenerator::global()->bounded(60, 900);
     int randNumber = QRandomGenerator::global()->bounded(1, 100);
     EnemyPlane::TypePlane typePlane = randNumber%15 == 0 ? EnemyPlane::TypePlane::typeAverage:
                                                            EnemyPlane::TypePlane::typeSimple;
-    EnemyPlane *enemy = new EnemyPlane(QPointF(xPoint,-100),typePlane, plane_);
+    EnemyPlane *enemy = new EnemyPlane(typePlane);
     int life = QRandomGenerator::global()->bounded(1, 3);
     enemy->setLife(life);
     gameScene_->addItem(enemy);
-    connect(enemy, &EnemyPlane::signalMeetMainPlane, this, &PlayingField::slotMeetEnemy);
+    enemy->setStartPos();
 }
 
 void PlayingField::slotDeleteEnemy(QGraphicsItem *item)
@@ -116,9 +150,14 @@ void PlayingField::slotDeleteEnemy(QGraphicsItem *item)
     }
 }
 
-void PlayingField::slotMeetEnemy()
+void PlayingField::slotEnemyAbaftField()
 {
     life_--;
     ui->spinLife->setValue(life_);
-    //ОБРАБОТАТЬ КОНЕЦ ЖИЗНЕЙ
+    if(life_ == 0)
+    {
+        gameScene_->addItem(textGameOver);
+        textGameOver->setPos(gameScene_->width()/2 - 250, gameScene_->height()/2);
+        slotStop();
+    }
 }

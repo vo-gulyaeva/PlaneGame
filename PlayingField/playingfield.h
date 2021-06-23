@@ -30,12 +30,13 @@ private slots:
     void slotStartBullet(QPointF);
     void slotCreateEnemy();
     void slotDeleteEnemy(QGraphicsItem*);
-    void slotMeetEnemy();
+    void slotEnemyAbaftField();
+    void slotStop();
 public:
     explicit PlayingField(QWidget *parent = 0);
     ~PlayingField();
-    void updatePosPlane();
-
+public slots:
+    void slotStart();
 private:
     Ui::PlayingField *ui;
     GameScene *gameScene_;
@@ -43,6 +44,7 @@ private:
     QTimer *timerEnemy_;
     int score_;
     int life_;
+    QGraphicsSimpleTextItem *textGameOver;
 };
 
 #endif // PLAYINGFIELD_H

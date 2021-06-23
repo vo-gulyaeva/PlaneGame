@@ -3,13 +3,12 @@
 #include <QList>
 #include <QPolygonF>
 #include <QGraphicsScene>
+#include <QRandomGenerator>
+#include <math.h>
 
-EnemyPlane::EnemyPlane(QPointF pos, EnemyPlane::TypePlane typePlane,
-                       QGraphicsItem *mainPlane,QObject *parent) :
-    QObject(parent), QGraphicsItem(), typePlane_(typePlane),
-    screw_(true), mainPlane_(mainPlane)
+EnemyPlane::EnemyPlane(EnemyPlane::TypePlane typePlane, QObject *parent) :
+    QObject(parent), QGraphicsItem(), typePlane_(typePlane), screw_(true)
 {
-    this->setPos(pos);
     namePix_ = typePlane_==TypePlane::typeSimple ? ":/res/PlayingField/enemy1_" : ":/res/PlayingField/enemy2_";
 
     timerScrew_ = new QTimer(this);
@@ -18,9 +17,13 @@ EnemyPlane::EnemyPlane(QPointF pos, EnemyPlane::TypePlane typePlane,
 
     timerMove_ = new QTimer(this);
     connect(timerMove_, &QTimer::timeout, this, &EnemyPlane::slotTimerMove);
-    timerMove_->start(100);
+    timerMove_->start(150);
 
     life_ = 1;
+
+    side_ = DepartureSide(QRandomGenerator::global()->bounded(0, 2));
+    course_ = generateCourse();
+    this->setRotation(course_);
 }
 
 EnemyPlane::~EnemyPlane()
@@ -52,23 +55,14 @@ void EnemyPlane::slotTimerScrew()
 
 void EnemyPlane::slotTimerMove()
 {
-    QList<QGraphicsItem*> foundItems = scene()->items(QPolygonF()<<mapToScene(0,0)
-                                                     <<mapToScene(0,60));
-    for(auto item : foundItems)
-        if(item == mainPlane_)
-        {
-            emit signalMeetMainPlane();
-            this->deleteLater();
-        }
-
+    //сдвиг
     QPointF pos = this->pos();
-    if(pos.y()+10 > 900)
-    {
-        emit signalMeetMainPlane();
-        this->deleteLater();
-    }
-
-    this->setPos(pos.x(),pos.y()+10);
+    double newX, newY;
+    double alpha = (180 - course_)*M_PI/180;
+    newX = pos.x() - 20*sin(alpha);
+    newY = pos.y() - 20*cos(alpha);
+    this->setPos(newX,newY);
+    //проверка на выход за границы осуществляется сценой
 }
 
 void EnemyPlane::setLife(int life)
@@ -92,4 +86,45 @@ bool EnemyPlane::tookHit()
 int EnemyPlane::typePlane()
 {
     return (int)typePlane_;
+}
+
+int EnemyPlane::generateCourse()
+{
+    switch (side_) {
+    case DepartureSide::top:
+        return QRandomGenerator::global()->bounded(-75, 75);
+    case DepartureSide::left:
+        return QRandomGenerator::global()->bounded(-75, -15);
+    case DepartureSide::right:
+        return QRandomGenerator::global()->bounded(15, 75);
+    default:
+        return 0;
+    }
+}
+
+void EnemyPlane::setStartPos()
+{
+    if(!this->scene())
+        return;
+    int width = this->scene()->width();
+    int height = this->scene()->height();
+    double x = 0, y = 0;
+    switch (side_) {
+    case DepartureSide::top:
+        if(course_ < 0)
+            x = QRandomGenerator::global()->bounded(0, (int)width/2);
+        else
+            x = QRandomGenerator::global()->bounded((int)width/2, width);
+        break;
+    case DepartureSide::left:
+        y = QRandomGenerator::global()->bounded(0, (int)height/2);
+        break;
+    case DepartureSide::right:
+        x = width;
+        y = QRandomGenerator::global()->bounded(0, (int)height/2);
+        break;
+    default:
+        break;
+    }
+    this->setPos(x,y);
 }

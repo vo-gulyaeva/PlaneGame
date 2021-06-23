@@ -19,13 +19,17 @@ class MainPlane : public QObject, public QGraphicsItem
 public:
     explicit MainPlane(QObject *parent = 0);
     ~MainPlane();
+signals:
+    void signalGameOver();      // Испускается при столкновении с самолетом противником
 private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 private slots:
     void slotTimerScrew();
+    void slotSearchEnemy();
 private:
     QTimer *timerScrew_;
+    QTimer *timerSearchEnemy_;
     bool screw_;
 };
 
