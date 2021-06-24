@@ -50,7 +50,6 @@ PlayingField::PlayingField(QWidget *parent) :
     plane_ = new MainPlane();
     gameScene_->addItem(plane_);
     connect(plane_, &MainPlane::signalGameOver, this, &PlayingField::slotStop);
-    connect(gameScene_, &GameScene::signalEnemyAbaftField, this, &PlayingField::slotEnemyAbaftField);
 
     connect(gameScene_, &GameScene::signalCursorCoordinate, this, &PlayingField::slotMovePlane);
 
@@ -88,12 +87,15 @@ void PlayingField::slotStop()
 {
     life_ = 0;
     ui->spinLife->setValue(life_);
+    gameScene_->addItem(textGameOver);
+    textGameOver->setPos(gameScene_->width()/2 - 250, gameScene_->height()/2);
+
     timerEnemy_->stop();
     disconnect(gameScene_, &GameScene::signalClick, this, &PlayingField::slotStartBullet);
     ui->phbToStart->setEnabled(true);
 
     for(auto item : gameScene_->items())
-        if(item!=plane_)
+        if(item!=plane_ && item!=textGameOver)
         {
             gameScene_->removeItem(item);
             delete item;
@@ -129,6 +131,7 @@ void PlayingField::slotCreateEnemy()
     enemy->setLife(life);
     gameScene_->addItem(enemy);
     enemy->setStartPos();
+    connect(enemy,&EnemyPlane::signalGettingOutField,this,&PlayingField::slotEnemyOutsideField);
 }
 
 void PlayingField::slotDeleteEnemy(QGraphicsItem *item)
@@ -150,14 +153,10 @@ void PlayingField::slotDeleteEnemy(QGraphicsItem *item)
     }
 }
 
-void PlayingField::slotEnemyAbaftField()
+void PlayingField::slotEnemyOutsideField()
 {
     life_--;
     ui->spinLife->setValue(life_);
     if(life_ == 0)
-    {
-        gameScene_->addItem(textGameOver);
-        textGameOver->setPos(gameScene_->width()/2 - 250, gameScene_->height()/2);
         slotStop();
-    }
 }

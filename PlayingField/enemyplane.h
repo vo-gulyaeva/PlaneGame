@@ -36,6 +36,8 @@ public:
                             //Возвращает true - жив, false - убит
     int typePlane();
     void setStartPos();     //ВЫЗОВ ПОСЛЕ ДОБАВЛЕНИЯ НА СЦЕНУ!
+signals:
+    void signalGettingOutField();
 private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -52,6 +54,7 @@ private:
     int life_;
     EnemyPlane::DepartureSide side_;
     int course_;
+    int width_, height_;        //параметры сцены
 };
 
 #endif // ENEMYPLANE_H

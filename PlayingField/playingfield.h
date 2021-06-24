@@ -30,7 +30,7 @@ private slots:
     void slotStartBullet(QPointF);
     void slotCreateEnemy();
     void slotDeleteEnemy(QGraphicsItem*);
-    void slotEnemyAbaftField();
+    void slotEnemyOutsideField();
     void slotStop();
 public:
     explicit PlayingField(QWidget *parent = 0);

@@ -62,7 +62,14 @@ void EnemyPlane::slotTimerMove()
     newX = pos.x() - 20*sin(alpha);
     newY = pos.y() - 20*cos(alpha);
     this->setPos(newX,newY);
-    //проверка на выход за границы осуществляется сценой
+    //проверка на выход за границы
+    if(newX<0 || newX >width_ || newY<0 || newY>height_)
+    {
+        this->scene()->removeItem(this);
+        emit signalGettingOutField();
+        this->deleteLater();
+        return;
+    }
 }
 
 void EnemyPlane::setLife(int life)
@@ -106,22 +113,22 @@ void EnemyPlane::setStartPos()
 {
     if(!this->scene())
         return;
-    int width = this->scene()->width();
-    int height = this->scene()->height();
+    width_ = this->scene()->width();
+    height_ = this->scene()->height();
     double x = 0, y = 0;
     switch (side_) {
     case DepartureSide::top:
         if(course_ < 0)
-            x = QRandomGenerator::global()->bounded(0, (int)width/2);
+            x = QRandomGenerator::global()->bounded(0, (int)width_/2);
         else
-            x = QRandomGenerator::global()->bounded((int)width/2, width);
+            x = QRandomGenerator::global()->bounded((int)width_/2, width_);
         break;
     case DepartureSide::left:
-        y = QRandomGenerator::global()->bounded(0, (int)height/2);
+        y = QRandomGenerator::global()->bounded(0, (int)height_/2);
         break;
     case DepartureSide::right:
-        x = width;
-        y = QRandomGenerator::global()->bounded(0, (int)height/2);
+        x = width_;
+        y = QRandomGenerator::global()->bounded(0, (int)height_/2);
         break;
     default:
         break;
